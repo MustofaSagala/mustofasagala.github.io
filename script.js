@@ -1,228 +1,228 @@
-import * as PIXI from "https://cdn.skypack.dev/pixi.js";
-import { KawaseBlurFilter } from "https://cdn.skypack.dev/@pixi/filter-kawase-blur";
-import SimplexNoise from "https://cdn.skypack.dev/simplex-noise";
-import hsl from "https://cdn.skypack.dev/hsl-to-hex";
-import debounce from "https://cdn.skypack.dev/debounce";
+    gsap.registerPlugin(ScrollTrigger);
+    let speed = 100;
 
-// return a random number within a range
-function random(min, max) {
-  return Math.random() * (max - min) + min;
-}
+    /*  SCENE 1 */
+    let scene1 = gsap.timeline();
+    ScrollTrigger.create({
+        animation: scene1,
+        trigger: ".scrollElement",
+        start: "top top",
+        end: "45% 100%",
+        scrub: 3,
+    });
 
-// map a number from 1 range to another
-function map(n, start1, end1, start2, end2) {
-  return ((n - start1) / (end1 - start1)) * (end2 - start2) + start2;
-}
+    // hills animation 
+    scene1.to("#h1-1", { y: 3 * speed, x: 1 * speed, scale: 0.9, ease: "power1.in" }, 0)
+    scene1.to("#h1-2", { y: 2.6 * speed, x: -0.6 * speed, ease: "power1.in" }, 0)
+    scene1.to("#h1-3", { y: 1.7 * speed, x: 1.2 * speed }, 0.03)
+    scene1.to("#h1-4", { y: 3 * speed, x: 1 * speed }, 0.03)
+    scene1.to("#h1-5", { y: 2 * speed, x: 1 * speed }, 0.03)
+    scene1.to("#h1-6", { y: 2.3 * speed, x: -2.5 * speed }, 0)
+    scene1.to("#h1-7", { y: 5 * speed, x: 1.6 * speed }, 0)
+    scene1.to("#h1-8", { y: 3.5 * speed, x: 0.2 * speed }, 0)
+    scene1.to("#h1-9", { y: 3.5 * speed, x: -0.2 * speed }, 0)
 
-// Create a new simplex noise instance
-const simplex = new SimplexNoise();
+    //animate text
+    scene1.to("#info", { y: 8 * speed }, 0)
 
-// ColorPalette class
-class ColorPalette {
-  constructor() {
-    this.setColors();
-    this.setCustomProperties();
-  }
 
-  setColors() {
-    // pick a random hue somewhere between 220 and 360
-    this.hue = ~~random(220, 360);
-    this.complimentaryHue1 = this.hue + 30;
-    this.complimentaryHue2 = this.hue + 60;
-    // define a fixed saturation and lightness
-    this.saturation = 95;
-    this.lightness = 50;
 
-    // define a base color
-    this.baseColor = hsl(this.hue, this.saturation, this.lightness);
-    // define a complimentary color, 30 degress away from the base
-    this.complimentaryColor1 = hsl(
-      this.complimentaryHue1,
-      this.saturation,
-      this.lightness
-    );
-    // define a second complimentary color, 60 degrees away from the base
-    this.complimentaryColor2 = hsl(
-      this.complimentaryHue2,
-      this.saturation,
-      this.lightness
-    );
+    /*   Bird   */
+    gsap.fromTo("#bird", { opacity: 1 }, {
+        y: -250,
+        x: 800,
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: ".scrollElement",
+            start: "15% top",
+            end: "60% 100%",
+            scrub: 4,
+            onEnter: function() { gsap.to("#bird", { scaleX: 1, rotation: 0 }) },
+            onLeave: function() { gsap.to("#bird", { scaleX: -1, rotation: -15 }) },
+        }
+    })
 
-    // store the color choices in an array so that a random one can be picked later
-    this.colorChoices = [
-      this.baseColor,
-      this.complimentaryColor1,
-      this.complimentaryColor2
-    ];
-  }
 
-  randomColor() {
-    // pick a random color
-    return this.colorChoices[~~random(0, this.colorChoices.length)].replace(
-      "#",
-      "0x"
-    );
-  }
+    /* Clouds  */
+    let clouds = gsap.timeline();
+    ScrollTrigger.create({
+        animation: clouds,
+        trigger: ".scrollElement",
+        start: "top top",
+        end: "70% 100%",
+        scrub: 1,
+    });
 
-  setCustomProperties() {
-    // set CSS custom properties so that the colors defined here can be used throughout the UI
-    document.documentElement.style.setProperty("--hue", this.hue);
-    document.documentElement.style.setProperty(
-      "--hue-complimentary1",
-      this.complimentaryHue1
-    );
-    document.documentElement.style.setProperty(
-      "--hue-complimentary2",
-      this.complimentaryHue2
-    );
-  }
-}
+    clouds.to("#cloud1", { x: 500 }, 0)
+    clouds.to("#cloud2", { x: 1000 }, 0)
+    clouds.to("#cloud3", { x: -1000 }, 0)
+    clouds.to("#cloud4", { x: -700, y: 25 }, 0)
 
-// Orb class
-class Orb {
-  // Pixi takes hex colors as hexidecimal literals (0x rather than a string with '#')
-  constructor(fill = 0x000000) {
-    // bounds = the area an orb is "allowed" to move within
-    this.bounds = this.setBounds();
-    // initialise the orb's { x, y } values to a random point within it's bounds
-    this.x = random(this.bounds["x"].min, this.bounds["x"].max);
-    this.y = random(this.bounds["y"].min, this.bounds["y"].max);
 
-    // how large the orb is vs it's original radius (this will modulate over time)
-    this.scale = 1;
 
-    // what color is the orb?
-    this.fill = fill;
+    /* Sun motion Animation  */
+    let sun = gsap.timeline();
+    ScrollTrigger.create({
+        animation: sun,
+        trigger: ".scrollElement",
+        start: "top top",
+        end: "2200 100%",
+        scrub: 1,
+    });
 
-    // the original radius of the orb, set relative to window height
-    this.radius = random(window.innerHeight / 6, window.innerHeight / 3);
+    //sun motion 
+    sun.to("#bg_grad", { attr: { cy: "330" } }, 0.00)
 
-    // starting points in "time" for the noise/self similar random values
-    this.xOff = random(0, 1000);
-    this.yOff = random(0, 1000);
-    // how quickly the noise/self similar random values step through time
-    this.inc = 0.002;
+    //bg change
+    sun.to("#sun", { attr: { offset: "0.15" } }, 0.00)
+    sun.to("#bg_grad stop:nth-child(2)", { attr: { offset: "0.15" } }, 0.00)
+    sun.to("#bg_grad stop:nth-child(3)", { attr: { offset: "0.18" } }, 0.00)
+    sun.to("#bg_grad stop:nth-child(4)", { attr: { offset: "0.25" } }, 0.00)
+    sun.to("#bg_grad stop:nth-child(5)", { attr: { offset: "0.46" } }, 0.00)
+    sun.to("#bg_grad stop:nth-child(6)", { attr: { "stop-color": "#FF9171" } }, 0)
 
-    // PIXI.Graphics is used to draw 2d primitives (in this case a circle) to the canvas
-    this.graphics = new PIXI.Graphics();
-    this.graphics.alpha = 0.825;
 
-    // 250ms after the last window resize event, recalculate orb positions.
-    window.addEventListener(
-      "resize",
-      debounce(() => {
-        this.bounds = this.setBounds();
-      }, 250)
-    );
-  }
 
-  setBounds() {
-    // how far from the { x, y } origin can each orb move
-    const maxDist =
-      window.innerWidth < 1000 ? window.innerWidth / 3 : window.innerWidth / 5;
-    // the { x, y } origin for each orb (the bottom right of the screen)
-    const originX = window.innerWidth / 1.25;
-    const originY =
-      window.innerWidth < 1000
-        ? window.innerHeight
-        : window.innerHeight / 1.375;
+    /*   SCENE 2  */
+    let scene2 = gsap.timeline();
+    ScrollTrigger.create({
+        animation: scene2,
+        trigger: ".scrollElement",
+        start: "15% top",
+        end: "40% 100%",
+        scrub: 4,
+    });
 
-    // allow each orb to move x distance away from it's x / y origin
-    return {
-      x: {
-        min: originX - maxDist,
-        max: originX + maxDist
-      },
-      y: {
-        min: originY - maxDist,
-        max: originY + maxDist
-      }
-    };
-  }
+    scene2.fromTo("#h2-1", { y: 500, opacity: 0 }, { y: 0, opacity: 1 }, 0)
+    scene2.fromTo("#h2-2", { y: 500 }, { y: 0 }, 0.1)
+    scene2.fromTo("#h2-3", { y: 700 }, { y: 0 }, 0.1)
+    scene2.fromTo("#h2-4", { y: 700 }, { y: 0 }, 0.2)
+    scene2.fromTo("#h2-5", { y: 800 }, { y: 0 }, 0.3)
+    scene2.fromTo("#h2-6", { y: 900 }, { y: 0 }, 0.3)
 
-  update() {
-    // self similar "psuedo-random" or noise values at a given point in "time"
-    const xNoise = simplex.noise2D(this.xOff, this.xOff);
-    const yNoise = simplex.noise2D(this.yOff, this.yOff);
-    const scaleNoise = simplex.noise2D(this.xOff, this.yOff);
 
-    // map the xNoise/yNoise values (between -1 and 1) to a point within the orb's bounds
-    this.x = map(xNoise, -1, 1, this.bounds["x"].min, this.bounds["x"].max);
-    this.y = map(yNoise, -1, 1, this.bounds["y"].min, this.bounds["y"].max);
-    // map scaleNoise (between -1 and 1) to a scale value somewhere between half of the orb's original size, and 100% of it's original size
-    this.scale = map(scaleNoise, -1, 1, 0.5, 1);
 
-    // step through "time"
-    this.xOff += this.inc;
-    this.yOff += this.inc;
-  }
+    /* Bats */
+    gsap.fromTo("#bats", { opacity: 1, y: 400, scale: 0 }, {
+        y: 120,
+        scale: 0.8,
+        transformOrigin: "50% 50%",
+        ease: "power3.out",
+        scrollTrigger: {
+            trigger: ".scrollElement",
+            start: "40% top",
+            end: "70% 100%",
+            scrub: 3,
+            onEnter: function() {
+                gsap.utils.toArray("#bats path").forEach((item, i) => {
+                    gsap.to(item, { scaleX: 0.5, yoyo: true, repeat: 11, duration: 0.15, delay: 0.7 + (i / 10), transformOrigin: "50% 50%" })
+                });
+                gsap.set("#bats", { opacity: 1 })
+            },
+            onLeave: function() { gsap.to("#bats", { opacity: 0, delay: 2 }) },
+        }
+    })
 
-  render() {
-    // update the PIXI.Graphics position and scale values
-    this.graphics.x = this.x;
-    this.graphics.y = this.y;
-    this.graphics.scale.set(this.scale);
 
-    // clear anything currently drawn to graphics
-    this.graphics.clear();
+    /* Sun increase */
+    let sun2 = gsap.timeline();
+    ScrollTrigger.create({
+        animation: sun2,
+        trigger: ".scrollElement",
+        start: "2200 top",
+        end: "5000 100%",
+        scrub: 1,
+    });
 
-    // tell graphics to fill any shapes drawn after this with the orb's fill color
-    this.graphics.beginFill(this.fill);
-    // draw a circle at { 0, 0 } with it's size set by this.radius
-    this.graphics.drawCircle(0, 0, this.radius);
-    // let graphics know we won't be filling in any more shapes
-    this.graphics.endFill();
-  }
-}
+    sun2.to("#sun", { attr: { offset: "0.6" } }, 0)
+    sun2.to("#bg_grad stop:nth-child(2)", { attr: { offset: "0.7" } }, 0)
+    sun2.to("#sun", { attr: { "stop-color": "#ffff00" } }, 0)
+    sun2.to("#lg4 stop:nth-child(1)", { attr: { "stop-color": "#623951" } }, 0)
+    sun2.to("#lg4 stop:nth-child(2)", { attr: { "stop-color": "#261F36" } }, 0)
+    sun2.to("#bg_grad stop:nth-child(6)", { attr: { "stop-color": "#45224A" } }, 0)
 
-// Create PixiJS app
-const app = new PIXI.Application({
-  // render to <canvas class="orb-canvas"></canvas>
-  view: document.querySelector(".orb-canvas"),
-  // auto adjust size to fit the current window
-  resizeTo: window,
-  // transparent background, we will be creating a gradient background later using CSS
-  transparent: true
+
+
+    /* Transition (from Scene2 to Scene3) */
+    gsap.set("#scene3", { y: 580, visibility: "visible" })
+    let sceneTransition = gsap.timeline();
+    ScrollTrigger.create({
+        animation: sceneTransition,
+        trigger: ".scrollElement",
+        start: "70% top",
+        end: "bottom 100%",
+        scrub: 3,
+    });
+
+    sceneTransition.to("#h2-1", { y: -680, scale: 1.5, transformOrigin: "50% 50%" }, 0)
+    sceneTransition.to("#bg_grad", { attr: { cy: "-80" } }, 0.00)
+    sceneTransition.to("#bg2", { y: 0 }, 0)
+
+
+
+    /* Scene 3 */
+    let scene3 = gsap.timeline();
+    ScrollTrigger.create({
+        animation: scene3,
+        trigger: ".scrollElement",
+        start: "80% 50%",
+        end: "bottom 100%",
+        scrub: 3,
+    });
+
+    //Hills motion
+    scene3.fromTo("#h3-1", { y: 300 }, { y: -550 }, 0)
+    scene3.fromTo("#h3-2", { y: 800 }, { y: -550 }, 0.03)
+    scene3.fromTo("#h3-3", { y: 600 }, { y: -550 }, 0.06)
+    scene3.fromTo("#h3-4", { y: 800 }, { y: -550 }, 0.09)
+    scene3.fromTo("#h3-5", { y: 1000 }, { y: -550 }, 0.12)
+
+    //stars
+    scene3.fromTo("#stars", { opacity: 0 }, { opacity: 0.5, y: -500 }, 0)
+
+    // Scroll Back text
+    scene3.fromTo("#arrow2", { opacity: 0 }, { opacity: 0.7, y: -710 }, 0.25)
+    scene3.fromTo("#text2", { opacity: 0 }, { opacity: 0.7, y: -710 }, 0.3)
+
+    //gradient value change
+    scene3.to("#bg2-grad", { attr: { cy: 600 } }, 0)
+    scene3.to("#bg2-grad", { attr: { r: 500 } }, 0)
+
+
+    /*   falling star   */
+    gsap.to("#fstar", {
+        x: -700,
+        y: -250,
+        ease: "power4.out",
+        scrollTrigger: {
+            trigger: ".scrollElement",
+            start: "4000 top",
+            end: "6000 100%",
+            scrub: 5,
+            onEnter: function() { gsap.set("#fstar", { opacity: 1 }) },
+            onLeave: function() { gsap.set("#fstar", { opacity: 0 }) },
+        }
+    })
+
+
+    //reset scrollbar position after refresh
+    window.onbeforeunload = function() {
+        window.scrollTo(0, 0);
+    }
+
+
+let fullscreen;
+let fsEnter = document.getElementById('fullscr');
+fsEnter.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (!fullscreen) {
+        fullscreen = true;
+        document.documentElement.requestFullscreen();
+        fsEnter.innerHTML = "Exit Fullscreen";
+    }
+    else {
+        fullscreen = false;
+        document.exitFullscreen();
+        fsEnter.innerHTML = "Go Fullscreen";
+    }
 });
-
-// Create colour palette
-const colorPalette = new ColorPalette();
-
-app.stage.filters = [new KawaseBlurFilter(30, 10, true)];
-
-// Create orbs
-const orbs = [];
-
-for (let i = 0; i < 10; i++) {
-  const orb = new Orb(colorPalette.randomColor());
-
-  app.stage.addChild(orb.graphics);
-
-  orbs.push(orb);
-}
-
-// Animate!
-if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  app.ticker.add(() => {
-    orbs.forEach((orb) => {
-      orb.update();
-      orb.render();
-    });
-  });
-} else {
-  orbs.forEach((orb) => {
-    orb.update();
-    orb.render();
-  });
-}
-
-document
-  .querySelector(".overlay__btn--colors")
-  .addEventListener("click", () => {
-    colorPalette.setColors();
-    colorPalette.setCustomProperties();
-
-    orbs.forEach((orb) => {
-      orb.fill = colorPalette.randomColor();
-    });
-  });
