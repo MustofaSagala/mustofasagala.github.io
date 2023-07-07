@@ -5,61 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mustofa Kamal Ahmad Sagala - Portfolio</title>
-    <!--
-    - favicon
-  -->
     <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
-    <!--
-    - custom css link
-  -->
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <!--
-    - google font link
-  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.all.min.js"></script>
-<style>
-  .swal2-title {
-  font-size: 20px;
-  color: #fff
-}
-.swal2-styled.swal2-confirm{
-  font-size: 14px;
-  background-color: hsl(35, 100%, 68%);
-  color: black;
-}
-.swal2-styled.swal2-cancel{
-  font-size: 14px;
-}
-/* Style for the dialog */
-.swal2-popup {
-  background-color: hsl(240, 2%, 12%);
-  border: 1px solid hsl(0, 0%, 31%)
-}
-
-/* Style for the password input */
-.swal2-input {
-  background-color: hsl(0, 0%, 30%);
-  color: #fff;
-  border: none;
-}
-[class^=swal2] {
-  color: #fff;
-}
-
-
-</style>
+    <link rel="stylesheet" href="./assets/css/style.css">
   </head>
   <body>
-    <!--
-    - #MAIN
-  -->
     <main>
-      <!--
-      - #SIDEBAR
-    -->
+
       <aside class="sidebar" data-sidebar>
         <div class="sidebar-info">
           <figure class="avatar-box">
@@ -92,10 +47,18 @@
               </div>
               <div class="contact-info">
                 <p class="contact-title">WhatsApp</p>
-                <a href="https://wa.me/+6283191914685" class="contact-link">0831-9191-4685</a>
+                <a href="#" class="contact-link" id="contact-link">Tampilkan Nomor</a>
               </div>
             </li>
-            
+            <li class="contact-item">
+              <div class="icon-box">
+                <ion-icon name="calendar-outline" role="img" class="md hydrated" aria-label="calendar outline"></ion-icon>
+              </div>
+              <div class="contact-info">
+                <p class="contact-title">Birthday</p>
+                <a href="#" class="contact-link" id="birthdayDate">Tampilkan Tanggal</a>
+              </div>
+            </li>
             <li class="contact-item">
               <div class="icon-box">
                 <ion-icon name="location-outline"></ion-icon>
@@ -126,13 +89,7 @@
           </ul>
         </div>
       </aside>
-      <!--
-      - #main-content
-    -->
       <div class="main-content">
-        <!--
-        - #NAVBAR
-      -->
         <nav class="navbar">
           <ul class="navbar-list">
             <li class="navbar-item">
@@ -146,21 +103,13 @@
             </li>
           </ul>
         </nav>
-        <!--
-        - #ABOUT
-      -->
         <article class="about  active" data-page="tentang">
           <header>
             <h2 class="h2 article-title">Tentang Saya</h2>
           </header>
           <section class="about-text">
-            <p align="justify"> Mustofa, seorang mahasiswa penuh semangat di dunia teknologi, Ia memiliki kecintaan yang mendalam terhadap ilmu pengetahuan dan terus mengasah keahliannya dalam berbagai bidang teknologi. 
-              Memiliki kecintaan mendalam pada ilmu pengetahuan dan eksplorasi budaya melalui jalan-jalan. Senang berbagi pengetahuan serta terbuka untuk kolaborasi, mendorong perubahan positif melalui solusi inovatif dalam teknologi untuk meningkatkan 
-              kualitas hidup dan memberikan kontribusi bagi orang lain. </p>
+            <p align="justify"> Mustofa, seorang mahasiswa penuh semangat di dunia teknologi, Ia memiliki kecintaan yang mendalam terhadap ilmu pengetahuan dan terus mengasah keahliannya dalam berbagai bidang teknologi. Memiliki kecintaan mendalam pada ilmu pengetahuan dan eksplorasi budaya melalui jalan-jalan. Senang berbagi pengetahuan serta terbuka untuk kolaborasi, mendorong perubahan positif melalui solusi inovatif dalam teknologi untuk meningkatkan kualitas hidup dan memberikan kontribusi bagi orang lain. </p>
           </section>
-          <!--
-          - service
-        -->
           <section class="service">
             <h3 class="h3 service-title">Yang sudah Aku Lakukan</h3>
             <ul class="service-list">
@@ -203,9 +152,6 @@
               </li>
             </ul>
           </section>
-          <!--
-          - testimonials
-        -->
           <section class="testimonials">
             <h3 class="h3 testimonials-title">Apa Kata Mereka</h3>
             <ul class="testimonials-list has-scrollbar">
@@ -255,9 +201,6 @@
               </li>
             </ul>
           </section>
-          <!--
-          - testimonials modal
-        -->
           <div class="modal-container" data-modal-container>
             <div class="overlay" data-overlay></div>
             <section class="testimonials-modal">
@@ -279,12 +222,7 @@
               </div>
             </section>
           </div>
-          
         </article>
-        <!--
-        - #RESUME
-      -->
-      
         <article class="resume" data-page="resume">
           <header>
             <h2 class="h2 article-title">Resume</h2>
@@ -381,9 +319,6 @@
             </ul>
           </section>
         </article>
-        <!--
-        - #PORTFOLIO
-      -->
         <article class="portfolio" data-page="portfolio">
           <header>
             <h2 class="h2 article-title">Portfolio</h2>
@@ -474,21 +409,12 @@
                   <p class="project-category">Applications</p>
                 </a>
               </li>
-              
             </ul>
           </section>
         </article>
-        
-        
       </div>
     </main>
-    <!--
-    - custom js link
-  -->
     <script src="./assets/js/script.js"></script>
-    <!--
-    - ionicon link
-  -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   </body>
