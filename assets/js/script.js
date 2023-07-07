@@ -135,10 +135,10 @@ for (let i = 0; i < formInputs.length; i++) {
 }
 
 
-
 // page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
+let resumeLoaded = false; // Variable to track if resume page has been loaded
 
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
@@ -146,8 +146,12 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
     for (let i = 0; i < pages.length; i++) {
       if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        // Check if the page is "resume"
-        if (pages[i].dataset.page === "resume") {
+        // Check if the page is "resume" and it has already been loaded
+        if (pages[i].dataset.page === "resume" && resumeLoaded) {
+          pages[i].classList.add("active");
+          navigationLinks[i].classList.add("active");
+          window.scrollTo(0, 0);
+        } else if (pages[i].dataset.page === "resume" && !resumeLoaded) {
           // Show password input using SweetAlert2
           Swal.fire({
             title: "Masukkan Password:",
@@ -160,7 +164,8 @@ for (let i = 0; i < navigationLinks.length; i++) {
             if (result.isConfirmed) {
               const password = result.value;
               // Check if the password is correct
-              if (password === "mus@123") { // Replace "your-password" with the actual password
+              if (password === "mus@2001") { // Replace "your-password" with the actual password
+                resumeLoaded = true; // Mark resume page as loaded
                 pages[i].classList.add("active");
                 navigationLinks[i].classList.add("active");
                 window.scrollTo(0, 0);
@@ -183,7 +188,71 @@ for (let i = 0; i < navigationLinks.length; i++) {
         navigationLinks[i].classList.remove("active");
       }
     }
-
   });
 }
 
+
+// Ambil elemen link kontak
+const contactLink = document.getElementById("contact-link");
+// Tambahkan variabel untuk melacak status tampilan nomor
+let isNumberVisible = false;
+// Tambahkan event listener untuk klik
+contactLink.addEventListener("click", function(event) {
+  event.preventDefault(); // Mencegah perilaku default dari tautan
+  if (isNumberVisible) {
+    // Jika nomor sudah ditampilkan, langsung arahkan ke link WhatsApp
+    window.open("https://wa.me/+6283191914685", "_blank");
+  } else {
+    // Jika nomor belum ditampilkan, tampilkan dialog permintaan kata sandi menggunakan SweetAlert2
+    Swal.fire({
+      title: "Masukkan Password",
+      input: "password",
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: true,
+      confirmButtonText: "Verifikasi",
+      showLoaderOnConfirm: true,
+      preConfirm: (password) => {
+        // Ganti dengan validasi password yang sesuai
+        if (password === "mus@2001") {
+          // Jika password benar, tampilkan nomor dan ubah status menjadi true
+          isNumberVisible = true;
+          contactLink.textContent = "0831-9191-4685";
+        } else {
+          Swal.showValidationMessage("Password salah");
+        }
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    });
+  }
+});
+// Ambil elemen link tanggal lahir
+const birthdayLink = document.getElementById("birthdayDate");
+// Tambahkan event listener untuk klik
+birthdayLink.addEventListener("click", function(event) {
+  event.preventDefault(); // Mencegah link melakukan aksi default (membuka halaman baru)
+  // Tampilkan dialog permintaan kata sandi menggunakan SweetAlert2
+  Swal.fire({
+    title: "Masukkan Password",
+    input: "password",
+    inputAttributes: {
+      autocapitalize: "off",
+    },
+    showCancelButton: true,
+    confirmButtonText: "Verifikasi",
+    showLoaderOnConfirm: true,
+    preConfirm: (password) => {
+      // Ganti dengan validasi password yang sesuai
+      if (password === "mus@2001") {
+        // Jika password benar, tampilkan tanggal lahir
+        const birthdayDate = document.createElement("time");
+        birthdayDate.textContent = "26 Maret 2001";
+        birthdayLink.parentNode.replaceChild(birthdayDate, birthdayLink);
+      } else {
+        Swal.showValidationMessage("Password salah");
+      }
+    },
+    allowOutsideClick: () => !Swal.isLoading(),
+  });
+});
