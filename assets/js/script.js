@@ -270,7 +270,7 @@ birthdayLink.addEventListener("click", function(event) {
     if (result.isConfirmed) {
       Swal.fire({
         title: "Waduh, Kepo dianya",
-        text: "Ayo cari tahu tentang Mustofa",
+        text: "Yauda yok cari tahu tentang Mustofa",
         icon: "success"
       });
     } else if (result.dismiss === Swal.DismissReason.cancel) {
