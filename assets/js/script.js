@@ -262,7 +262,7 @@ birthdayLink.addEventListener("click", function(event) {
  document.addEventListener("DOMContentLoaded", function() {
   Swal.fire({
     title: "Hiyaaa Kepo!",
-    text: "Mau ngapain nih?",
+    text: "Mau ngapain?",
     showCancelButton: true,
     confirmButtonText: "Kepo nih",
     cancelButtonText: "Ssst diem",
