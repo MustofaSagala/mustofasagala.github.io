@@ -256,3 +256,32 @@ birthdayLink.addEventListener("click", function(event) {
     allowOutsideClick: () => !Swal.isLoading(),
   });
 });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    // Tampilkan SweetAlert2 saat halaman diakses
+    Swal.fire({
+      title: "Hiyaaa Kepo!",
+      text: "Mau ngapain nih?",
+      showCancelButton: true,
+      confirmButtonText: "Kepo nih",
+      cancelButtonText: "Ssst diem",
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      icon: "info",
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Waduh, Kepo dianya",
+          text: "Ayo cari tahu tentang Mustofa",
+          icon: "success"
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: "Oke, diem yaa",
+          text: "Pura-pura nggatau aja",
+          icon: "info"
+        });
+      }
+    });
+  });
