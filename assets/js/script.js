@@ -212,6 +212,7 @@ contactLink.addEventListener("click", function(event) {
       },
       showCancelButton: true,
       confirmButtonText: "Verifikasi",
+      cancelButtonText: "Batal",
       showLoaderOnConfirm: true,
       preConfirm: (password) => {
         // Ganti dengan validasi password yang sesuai
@@ -241,6 +242,7 @@ birthdayLink.addEventListener("click", function(event) {
     },
     showCancelButton: true,
     confirmButtonText: "Verifikasi",
+    cancelButtonText: "Batal",
     showLoaderOnConfirm: true,
     preConfirm: (password) => {
       // Ganti dengan validasi password yang sesuai
