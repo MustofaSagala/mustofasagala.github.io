@@ -264,8 +264,6 @@ birthdayLink.addEventListener("click", function(event) {
     showCancelButton: true,
     confirmButtonText: "Kepo nih",
     cancelButtonText: "Ssst diem",
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
     icon: "info",
     allowOutsideClick: false
   }).then((result) => {
