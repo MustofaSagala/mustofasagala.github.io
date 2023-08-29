@@ -432,18 +432,16 @@
       icon: "info",
       allowOutsideClick: false
     }).then((result) => {
-      // Jika tombol "Kepo nih" diklik
       if (result.isConfirmed) {
         Swal.fire({
           title: "Kepo nih",
-          text: "Ayo ceritain!",
+          text: "Ayo cari tahu tentang Mustofa",
           icon: "success"
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        // Jika tombol "Ssst diem" diklik atau popup ditutup
         Swal.fire({
-          title: "Oke, diem aja!",
-          text: "Nanti ceritanya ya.",
+          title: "Oke, diem yaa",
+          text: "Pura-pura nggatau aja",
           icon: "info"
         });
       }
