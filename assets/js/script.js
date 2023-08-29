@@ -157,8 +157,8 @@ for (let i = 0; i < navigationLinks.length; i++) {
             title: "Masukkan Password:",
             input: "password",
             showCancelButton: true,
-            confirmButtonText: "Submit",
-            cancelButtonText: "Cancel",
+            confirmButtonText: "Verifikasi",
+            cancelButtonText: "Batal",
             allowOutsideClick: false
           }).then((result) => {
             if (result.isConfirmed) {
@@ -218,7 +218,7 @@ contactLink.addEventListener("click", function(event) {
         if (password === "mus@2001") {
           // Jika password benar, tampilkan nomor dan ubah status menjadi true
           isNumberVisible = true;
-          contactLink.textContent = "0831-9191-4685";
+          contactLink.textContent = "0823-6014-6314";
         } else {
           Swal.showValidationMessage("Password salah");
         }
