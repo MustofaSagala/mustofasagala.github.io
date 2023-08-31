@@ -259,29 +259,66 @@ birthdayLink.addEventListener("click", function(event) {
   });
 });
 
- document.addEventListener("DOMContentLoaded", function() {
-  Swal.fire({
-    title: "Hiyaaa Kepo!",
-    text: "Mau ngapain?",
-    showCancelButton: true,
-    confirmButtonText: "Kepo nih",
-    cancelButtonText: "Ssst diem",
-    icon: "info",
-    allowOutsideClick: false
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: "Waduh, Kepo dianya",
-        text: "Yauda yok cari tahu tentang Mustofa",
-        icon: "success"
-      });
-    } else if (result.dismiss === Swal.DismissReason.cancel) {
-      Swal.fire({
-        title: "Oke, diem yaa",
-        text: "Pura-pura nggatau aja",
-        icon: "info"
-      });
+
+document.addEventListener("DOMContentLoaded", function() {
+  var mainContent = document.getElementById('main-content');
+  var popup = document.getElementById('popup');
+  var userAnswer = document.getElementById('answer');
+  var resultMessage = document.getElementById('result');
+
+  // Daftar jawaban yang benar
+  var correctAnswers = ['19', '2019', 'stambuk 2019','stambuk19'];
+
+  // Fungsi untuk memeriksa jawaban kuis
+  function checkAnswer() {
+    var userAnswerValue = userAnswer.value.toLowerCase();
+
+    if (correctAnswers.includes(userAnswerValue)) {
+      resultMessage.innerHTML = '<span class="correct-answer">Jawaban Anda benar! Selamat datang di Halaman Utama.</span>';
+      popup.style.display = 'none';
+      mainContent.style.display = 'block';
+      showHiyaaPopup();
+      
+    } else {
+      resultMessage.innerHTML = '<span class="wrong-answer">Jawaban salah. Silakan coba lagi.</span>';
+    }
+  }
+
+  // Menambahkan event listener untuk mendeteksi tombol "Enter" pada input jawaban
+  userAnswer.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent default Enter behavior (e.g., submitting the form)
+      checkAnswer(); // Panggil fungsi checkAnswer
     }
   });
-});
 
+  // Fungsi untuk menampilkan popup "Hiyaa Kepo"
+  function showHiyaaPopup() {
+    Swal.fire({
+      title: "Hiyaaa Kepo!",
+      text: "Mau ngapain?",
+      showCancelButton: true,
+      confirmButtonText: "Kepo nih",
+      cancelButtonText: "Ssst diem",
+      icon: "info",
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Waduh, Kepo dianya",
+          text: "Yauda yok cari tahu tentang Mustofa",
+          icon: "success"
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: "Oke, diem yaa",
+          text: "Pura-pura nggatau aja",
+          icon: "info"
+        });
+      }
+    });
+  }
+
+    // Memanggil fungsi checkAnswer saat tombol submit ditekan
+    document.getElementById('submit').addEventListener('click', checkAnswer);
+  });
