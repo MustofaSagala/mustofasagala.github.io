@@ -266,33 +266,55 @@ document.addEventListener("DOMContentLoaded", function() {
   var userAnswer = document.getElementById('answer');
   var resultMessage = document.getElementById('result');
 
-  // Daftar jawaban yang benar
-  var correctAnswers = ['19', '2019', 'stambuk 2019','stambuk19'];
+  var questions = [
+    { question: 'Mustofa diperkuliahan stambuk berapa?', answers: ['19', '2019','stambuk 2019'] },
+    { question: 'Mustofa jurusan apa?', answers: ['akuntansi', 'akuntansi syariah','aks'] }
+  ];
 
-  // Fungsi untuk memeriksa jawaban kuis
+  var currentQuestionIndex = 0;
+
   function checkAnswer() {
     var userAnswerValue = userAnswer.value.toLowerCase();
 
-    if (correctAnswers.includes(userAnswerValue)) {
-      resultMessage.innerHTML = '<span class="correct-answer">Jawaban Anda benar! Selamat datang di Halaman Utama.</span>';
-      popup.style.display = 'none';
-      mainContent.style.display = 'block';
-      showHiyaaPopup();
-      
+    var currentQuestion = questions[currentQuestionIndex];
+
+    if (currentQuestion.answers.includes(userAnswerValue)) {
+      resultMessage.innerHTML = '<span class="correct-answer">Jawaban Anda benar! Silakan lanjut ke pertanyaan berikutnya.</span>';
+      userAnswer.value = ''; // Mengosongkan input jawaban
+      currentQuestionIndex++;
+
+      if (currentQuestionIndex < questions.length) {
+        showQuestion(currentQuestionIndex);
+      } else {
+        showFinalMessage();
+        setTimeout(showHiyaaPopup, 700);
+      }
     } else {
       resultMessage.innerHTML = '<span class="wrong-answer">Jawaban salah. Silakan coba lagi.</span>';
+      userAnswer.value = ''; // Mengosongkan input jawaban saat salah
     }
   }
 
-  // Menambahkan event listener untuk mendeteksi tombol "Enter" pada input jawaban
   userAnswer.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
-      event.preventDefault(); // Prevent default Enter behavior (e.g., submitting the form)
-      checkAnswer(); // Panggil fungsi checkAnswer
+      event.preventDefault();
+      checkAnswer();
     }
   });
 
-  // Fungsi untuk menampilkan popup "Hiyaa Kepo"
+  function showQuestion(index) {
+    var currentQuestion = questions[index];
+    resultMessage.innerHTML = '';
+    userAnswer.value = '';
+    document.querySelector('.question').textContent = currentQuestion.question;
+  }
+
+  function showFinalMessage() {
+    resultMessage.innerHTML = '<span class="correct-answer">Selamat, Anda telah menyelesaikan semua pertanyaan!</span>';
+    popup.style.display = 'none';
+    mainContent.style.display = 'block';
+  }
+
   function showHiyaaPopup() {
     Swal.fire({
       title: "Hiyaaa Kepo!",
@@ -319,6 +341,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-    // Memanggil fungsi checkAnswer saat tombol submit ditekan
-    document.getElementById('submit').addEventListener('click', checkAnswer);
-  });
+  showQuestion(currentQuestionIndex);
+
+  document.getElementById('submit').addEventListener('click', checkAnswer);
+});
