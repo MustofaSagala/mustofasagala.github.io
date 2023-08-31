@@ -1951,7 +1951,9 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 }
 
-
+.popup-quiz{
+  font-size: 20px;
+}
 .popup-container {
   background-color: hsl(240, 2%, 12%);
   border: 1px solid hsl(0, 0%, 31%);
@@ -1967,8 +1969,8 @@ textarea.form-input::-webkit-resizer { display: none; }
 }
 
 .question {
-  font-size: 20px;
-  margin-bottom: 20px;
+  font-size: 16px;
+  margin: 20px 0 20px 0;
 }
 
 .answer-input {
