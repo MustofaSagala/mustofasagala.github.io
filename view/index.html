@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- ============ META =============== -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mustofa Kamal Ahmad Sagala</title>
+    <meta name="robots" content="noindex">
+    <!-- ============ FAVICON =============== -->
+    <link rel="icon" href="assets/images/favicon/favicon.png">
+    <!-- ============ GOOGLE FONT =============== -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:600,600i,700" rel="stylesheet">
+    <!-- ============ CSS =============== -->
+    <!-- Bootstrap -->
+    <link href="https://jurnal.biz.id/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://jurnal.biz.id/assets/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Flaticon -->
+    <link href="https://jurnal.biz.id/assets/fonts/flaticon/flaticon.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="https://jurnal.biz.id/assets/css/style.css" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+</head>
+<body id="body" class="wide-layout preloader-active">
+    <!-- ============ PRELOADER =============== -->
+    <div id="preloader" class="preloader">
+        <div class="loader fa fa-spin pos-center"></div>
+    </div>
+    <!-- ============ WRAPPER =============== -->
+    <div id="pageWrapper" class="page-wrapper">
+        <!-- ============ Content =============== -->
+        <main class="main-content">
+            <div class="page-container">
+                <!-- Start Domains Area -->
+                <section class="section domains-area ptb-60">
+                    <div class="container">
+                        <div class="row mb-40">
+                            <div class="col-lg-10 col-md-8 col-sm-10 col-xs-12 col-xs-center t-center">
+                                <h2 class="mb-20 font-50 t-uppercase">إِنَّ مَعَ الْعُسْرِ يُسْرًا</h2>
+                                <br>
+                                <p class="color-mid">“Sesungguhnya, sesudah kesulitan itu ada kemudahan.” – (QS.94:6)</p>
+                                <br>
+                                <p class="color-mid">😊😅</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </section>
+                <!-- End Domain Area -->
+            </div>
+        </main>
+        <!-- ============ Footer =============== -->
+        <footer class="main-footer bg-dark color-lighter">
+            <div class="container">
+                <div class="copyright-text">@MustofaSagala</div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- ============ Javascript Libs =============== -->
+    <!-- jQuery  -->
+    <script>
+        // Atur kata sandi yang benar
+        const correctPassword = "masmus";
+
+        (async () => {
+            const { value: userPassword } = await Swal.fire({
+                title: 'Masukkan Kata Sandi:',
+                input: 'password',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                inputPlaceholder: 'Kata Sandi',
+                showCancelButton: false,
+                showLoaderOnConfirm: true,
+                confirmButtonText: 'Submit',
+                preConfirm: (password) => {
+                    if (password === correctPassword) {
+                        return password;
+                    } else {
+                        Swal.showValidationMessage('Kata sandi salah. Coba lagi.');
+                    }
+                }
+            });
+
+            if (userPassword === correctPassword) {
+                // Tampilkan preloader jika kata sandi benar
+                const preloader = document.getElementById("preloader");
+                preloader.style.display = "block";
+            } else {
+                // Tampilkan pesan kesalahan jika kata sandi salah
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Kata sandi salah',
+                    text: 'Halaman tidak dapat dimuat.'
+                });
+            }
+        })();
+    </script>
+    <script src="https://jurnal.biz.id/assets/js/jquery-1.12.3.min.js"></script>
+    <!-- Custom JavaScript  -->
+    <script type="text/javascript" src="https://jurnal.biz.id/assets/js/script.js"></script>
+    
+</body>
+</html>
