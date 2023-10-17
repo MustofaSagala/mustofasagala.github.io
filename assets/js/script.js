@@ -267,8 +267,8 @@ document.addEventListener("DOMContentLoaded", function() {
   var resultMessage = document.getElementById('result');
 
   var questions = [
-    { question: 'Mustofa diperkuliahan stambuk berapa?', answers: ['19', '2019','stambuk 2019'] },
-    { question: 'Mustofa jurusan apa?', answers: ['akuntansi', 'akuntansi syariah','aks'] }
+    { question: 'Siapa nama lengkap Mustofa?', answers: ['Mustofa Kamal Ahmad Sagala', 'mustofa kamal ahmad sagala','MUSTOFA KAMAL AHMAD SAGALA'] },
+    { question: 'Siapa presiden Indonesia?', answers: ['akuntansi', 'akuntansi syariah','aks'] }
   ];
 
   var currentQuestionIndex = 0;
