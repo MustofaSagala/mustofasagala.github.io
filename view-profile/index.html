@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mustofa Kamal Ahmad Sagala</title>
+    <title>View Profile Mustofa Sagala</title>
     <meta name="robots" content="noindex">
     <!-- ============ FAVICON =============== -->
     <link rel="icon" href="assets/images/favicon/favicon.png">
@@ -21,18 +21,14 @@
     <!-- Template Stylesheet -->
     <link href="https://jurnal.biz.id/assets/css/style.css" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8M58MP3JWL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-8M58MP3JWL');
-</script>
     <style>
         .ptb-60 {
             margin-top: 100px;
         }
+        .page-wrapper{
+        min-height: 90.2vh;
+   }
     </style>
 </head>
 <body id="body" class="wide-layout preloader-active">
@@ -63,54 +59,17 @@
                 <!-- End Domain Area -->
             </div>
         </main>
+    </div>
         <!-- ============ Footer =============== -->
         <footer class="main-footer bg-dark color-lighter">
             <div class="container">
                 <div class="copyright-text">@MustofaSagala</div>
             </div>
         </footer>
-    </div>
+    
     
     <!-- ============ Javascript Libs =============== -->
     <!-- jQuery  -->
-    <script>
-        // Atur kata sandi yang benar
-        const correctPassword = "masmus";
-
-        (async () => {
-            const { value: userPassword } = await Swal.fire({
-                title: 'Masukkan Kata Sandi:',
-                input: 'password',
-                inputAttributes: {
-                    autocapitalize: 'off'
-                },
-                inputPlaceholder: 'Kata Sandi',
-                showCancelButton: false,
-                showLoaderOnConfirm: true,
-                confirmButtonText: 'Submit',
-                preConfirm: (password) => {
-                    if (password === correctPassword) {
-                        return password;
-                    } else {
-                        Swal.showValidationMessage('Kata sandi salah. Coba lagi.');
-                    }
-                }
-            });
-
-            if (userPassword === correctPassword) {
-                // Tampilkan preloader jika kata sandi benar
-                const preloader = document.getElementById("preloader");
-                preloader.style.display = "block";
-            } else {
-                // Tampilkan pesan kesalahan jika kata sandi salah
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Kata sandi salah',
-                    text: 'Halaman tidak dapat dimuat.'
-                });
-            }
-        })();
-    </script>
     <script src="https://jurnal.biz.id/assets/js/jquery-1.12.3.min.js"></script>
     <!-- Custom JavaScript  -->
     <script type="text/javascript" src="https://jurnal.biz.id/assets/js/script.js"></script>
