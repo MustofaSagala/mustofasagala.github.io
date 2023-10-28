@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hmmm Apa yaaa</title>
+</head>
+<body>
+  <div id="countdown">
+    <h1>Waktu Mundur</h1>
+    <p id="timer"></p>
+  </div>
+  
+  <div id="content" style="display: none;">
+    <img src="https://mustofasagala.com/rara/apaaa.jpg" alt="Gambar">
+    <p>Uda mulai berdebu nih, kapan ada waktu luang?</p>
+  </div>
+
+  <script>
+    // Tentukan waktu target untuk countdown (dalam milidetik)
+    var targetTime = new Date();
+    targetTime.setHours(21, 50, 0, 0);
+
+    function updateCountdown() {
+      var currentTime = new Date().getTime();
+      var timeLeft = targetTime - currentTime;
+
+      if (timeLeft <= 0) {
+        document.getElementById('timer').innerHTML = "Waktu sudah habis!";
+        document.getElementById('content').style.display = 'block';
+        clearInterval(countdownInterval); // Hentikan perbaruan countdown
+      } else {
+        var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById('timer').innerHTML = hours + " jam " + minutes + " menit " + seconds + " detik ";
+      }
+    }
+
+    // Memperbarui countdown setiap detik
+    var countdownInterval = setInterval(updateCountdown, 1000);
+
+    // Panggil fungsi pertama kali saat halaman dimuat
+    updateCountdown();
+  </script>
+</body>
+</html>
