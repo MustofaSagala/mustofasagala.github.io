@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hmmm Apa yaaa</title>
+  <title>Countdown Timer</title>
+  <style>
+    #countdown {
+      text-align: center;
+    }
+
+    #content img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
 </head>
 <body>
   <div id="countdown">
@@ -9,15 +19,15 @@
     <p id="timer"></p>
   </div>
   
-  <div id="content" style="display: none;">
-    <img src="https://mustofasagala.com/rara/apaaa.jpg" alt="Gambar">
-    <p>Uda mulai berdebu nih, kapan ada waktu luang?</p>
+  <div id="content" style="display: none; text-align: center;">
+    <img src="gambar.jpg" alt="Gambar" class="responsive-image">
+    <h2>Tulisan yang akan ditampilkan saat waktu tercapai.</h2>
   </div>
 
   <script>
     // Tentukan waktu target untuk countdown (dalam milidetik)
     var targetTime = new Date();
-    targetTime.setHours(21, 50, 0, 0);
+    targetTime.setHours(23, 0, 0, 0);
 
     function updateCountdown() {
       var currentTime = new Date().getTime();
