@@ -19,7 +19,7 @@
 </head>
 <body>
   <div id="countdown">
-    <h1>Waktu Mundur</h1>
+    <h1>Pesan untuk Rara</h1>
     <p id="timer"></p>
   </div>
   
@@ -38,7 +38,7 @@
       var timeLeft = targetTime - currentTime;
 
       if (timeLeft <= 0) {
-        document.getElementById('timer').innerHTML = "Waktu sudah habis!";
+        document.getElementById('timer').innerHTML = "";
         document.getElementById('content').style.display = 'block';
         clearInterval(countdownInterval); // Hentikan perbaruan countdown
       } else {
