@@ -21,13 +21,6 @@
     <!-- Template Stylesheet -->
     <link href="https://jurnal.biz.id/assets/css/style.css" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8M58MP3JWL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-8M58MP3JWL');
-</script>
     <style>
       .ptb-60 {
         margin-top: 100px;
@@ -39,6 +32,18 @@
       body{
       min-height:0;
       }
+      .love-button {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #000; /* Warna awal ikon hati */
+  cursor: pointer;
+  transition: color 0.3s; /* Animasi warna ikon */
+}
+
+.love-button.active {
+  color: red; /* Warna ikon hati saat diklik */
+}
     </style>
     
   </head>
@@ -65,6 +70,11 @@
                   <br>
                   <p class="color-mid" style="text-align: center; font-size: 12px;"> © All right reserved | Made with ♥ by @mustofasagala </p>
                 </div>
+                <button id="loveButton" class="love-button">
+                  <i class="fa fa-heart"></i>
+                </button>
+                <span id="loveCount">0</span>
+                
               </div>
             </div>
           </section>
@@ -78,5 +88,29 @@
     <script src="https://jurnal.biz.id/assets/js/jquery-1.12.3.min.js"></script>
     <!-- Custom JavaScript  -->
     <script type="text/javascript" src="https://jurnal.biz.id/assets/js/script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const loveButton = document.getElementById("loveButton");
+        const loveCountElement = document.getElementById("loveCount");
+      
+        // Fungsi untuk mengirim permintaan ke server dan menyimpan jumlah "Love" ke database
+        function incrementLoveCount() {
+          // Kirim permintaan AJAX ke server untuk meningkatkan jumlah "Love"
+          // Di sini, kita hanya menambahkan 1 ke jumlah "Love" setiap kali tombol diklik.
+          // Anda harus menggantinya dengan permintaan sebenarnya ke server dan mengupdate basis data.
+          
+          let currentCount = parseInt(loveCountElement.innerHTML);
+          currentCount += 1;
+          loveCountElement.innerHTML = currentCount;
+      
+          // Mengubah warna ikon hati menjadi merah (aktif)
+          loveButton.classList.add("active");
+        }
+      
+        // Tambahkan event listener ke tombol "Love"
+        loveButton.addEventListener("click", incrementLoveCount);
+      });
+      </script>
+      
   </body>
 </html>
