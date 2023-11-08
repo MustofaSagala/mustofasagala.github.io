@@ -35,13 +35,20 @@
   background: transparent;
   border: none;
   font-size: 24px;
-  color: #000; /* Warna awal ikon hati */
+  color: #000;
   cursor: pointer;
-  transition: color 0.3s; /* Animasi warna ikon */
+  transition: color 0.3s;
+  display: block;
+  margin: 0 auto;
+}
+
+.love-count {
+  text-align: center;
+  margin-top: 10px; /* Atur jarak antara tombol dan jumlah "Love" */
 }
 
 .love-button.active {
-  color: red; /* Warna ikon hati saat diklik */
+  color: red;
 }
     </style>
     
@@ -69,10 +76,13 @@
                   <br>
                   <p class="color-mid" style="text-align: center; font-size: 12px;"> © All right reserved | Made with ♥ by @mustofasagala </p>
                 
-                <button id="loveButton" class="love-button">
-                  <i class="fa fa-heart"></i>
-                </button>
-                <span id="loveCount">0</span>
+                  <div id="loveContainer">
+                    <button id="loveButton" class="love-button">
+                      <i class="fa fa-heart"></i>
+                    </button>
+                    <span id="loveCount" class="love-count">0</span>
+                  </div>
+                  
               </div>
               </div>
             </div>
