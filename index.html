@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contoh Pengambilan Konten</title>
+    <title>Halaman Web Sederhana</title>
 </head>
 <body>
     <div id="content">
@@ -11,22 +11,24 @@
     </div>
 
     <script>
-        // Fungsi untuk melakukan permintaan ke halaman web yang memiliki sesi
-        function fetchData() {
-            fetch('https://mustofa.sagala.my.id/about', {
-                method: 'GET',
-                credentials: 'include'
-            })
-            .then(response => response.text())
-            .then(data => {
+        // Fungsi untuk memuat konten dari halaman web yang memiliki sesi
+        async function loadContent() {
+            try {
+                const response = await fetch('https://mustofa.sagala.my.id/about', {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                const data = await response.text();
+
                 // Memasukkan konten yang diperoleh ke dalam elemen dengan ID 'content'
                 document.getElementById('content').innerHTML = data;
-            })
-            .catch(error => console.error('Error:', error));
+            } catch (error) {
+                console.error('Error:', error);
+            }
         }
 
-        // Memanggil fungsi fetchData() saat halaman dimuat
-        window.onload = fetchData;
+        // Memanggil fungsi loadContent() saat halaman dimuat
+        window.onload = loadContent;
     </script>
 </body>
 </html>
