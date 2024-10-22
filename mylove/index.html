@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mas❤️Rara</title>
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 48px;
+      color: black;
+      text-align: center;
+    }
+
+    .icon-container {
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    .icon-love {
+      font-size: 64px;
+      color: black; /* Warna hitam awal */
+      transition: color 0.3s ease;
+    }
+
+    .icon-love.clicked {
+      color: red; /* Warna merah setelah diklik */
+    }
+
+    .like-counter {
+      margin-top: 10px;
+      font-size: 24px;
+      color: black;
+      text-align: center;
+    }
+
+    .text-container {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 16px;
+      color: gray;
+      text-align: center;
+    }
+
+    .footer span {
+      color: red;
+    }
+
+    /* Popup styling */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 18px;
+      display: none;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .popup button {
+      margin-top: 10px;
+      padding: 5px 15px;
+      background-color: white;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .popup button:hover {
+      background-color: lightgray;
+    }
+
+    /* Overlay behind the popup */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 999;
+    }
+    .like-counter {
+    font-size:14px;
+    font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 36px;
+      }
+
+      .icon-love {
+        font-size: 48px;
+      }
+
+      .text-container {
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      .icon-love {
+        font-size: 36px;
+      }
+
+      .text-container {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Selamat Datang Sayang ❤️</h1>
+
+  <div class="icon-container">
+    <i class="fas fa-heart icon-love" id="love-icon"></i> <!-- Menggunakan Font Awesome fa-heart -->
+  </div>
+
+  <!-- Like counter -->
+  <div class="like-counter" id="like-counter">0</div>
+
+  <div class="text-container">
+    <span id="aku">Rara</span>
+    <span id="dan">...</span> <!-- Titik-titik awal -->
+    <span id="kamu">Mas</span>
+  </div>
+
+  <div class="footer">
+    &copy; 2022 - <script>document.write(new Date().getFullYear());</script> - Made with <span>&hearts;</span> by @mustofasagala
+  </div>
+
+  <!-- Popup element -->
+  <div class="overlay" id="overlay"></div>
+  <div id="popup" class="popup">
+    <p id="greeting"></p>
+    <button id="close-popup">Close</button>
+  </div>
+
+  <script>
+    // Love icon click event
+    const loveIcon = document.getElementById('love-icon');
+    const danText = document.getElementById('dan');
+    const likeCounter = document.getElementById('like-counter');
+    let likeCount = 0;
+
+    loveIcon.addEventListener('click', function() {
+      // Hanya ubah warna pertama kali diklik, tidak kembali ke hitam
+      if (!loveIcon.classList.contains('clicked')) {
+        loveIcon.classList.add('clicked');
+      }
+
+      // Tambahkan jumlah like
+      likeCount++;
+      likeCounter.textContent = `${likeCount}`;
+
+      // Ubah dari titik-titik menjadi "DAN" saat diklik
+      if (danText.textContent === '...') {
+        danText.textContent = 'Sayang';
+      }
+    });
+
+    // Display popup based on time of day
+    const popup = document.getElementById('popup');
+    const overlay = document.getElementById('overlay');
+    const greetingText = document.getElementById('greeting');
+    const closeButton = document.getElementById('close-popup');
+
+    const now = new Date();
+    const hours = now.getHours();
+
+    let greeting = '';
+
+    if (hours >= 5 && hours < 12) {
+      greeting = 'Selamat Pagi!';
+    } else if (hours >= 12 && hours < 18) {
+      greeting = 'Selamat Siang!';
+    } else {
+      greeting = 'Selamat Malam!';
+    }
+
+    greetingText.textContent = greeting;
+    popup.style.display = 'block';
+    overlay.style.display = 'block';
+
+    // Close the popup
+    closeButton.addEventListener('click', () => {
+      popup.style.display = 'none';
+      overlay.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
