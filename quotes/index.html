@@ -104,51 +104,7 @@
     <script type="text/javascript" src="assets/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
-    <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const loveButton = document.getElementById("loveButton");
-  const loveCount = document.getElementById("loveCount");
-  const currentPath = window.location.pathname; // Mendapatkan path URL
-
-  function loadLoveCount() {
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", `get_love_count.php?id=${extractID(currentPath)}`, true);
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        loveCount.textContent = xhr.responseText;
-      }
-    };
-    xhr.send();
-  }
-
-  function extractID(path) {
-    // Mengambil ID dari path URL
-    const match = path.match(/\/(\d+)$/);
-    return match ? parseInt(match[1]) : 1; // Defaultkan ke 1 jika tidak ada ID yang ditemukan
-  }
-
-  loadLoveCount();
-  setInterval(loadLoveCount, 500);
-
-  loveButton.addEventListener("click", function () {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "update_love.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        loveCount.textContent = xhr.responseText;
-        loveButton.classList.toggle("active");
-        loveButton.style.transform = "scale(1.2)";
-        loveButton.style.color = "red";
-        setTimeout(() => {
-          loveButton.style.transform = "scale(1)";
-        }, 300);
-      }
-    };
-    xhr.send(`id=${extractID(currentPath)}`);
-  });
-});
-</script>
+    
 
   </body>
 </html>
