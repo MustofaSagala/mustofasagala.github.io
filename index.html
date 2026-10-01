@@ -1,188 +1,455 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta name="robots" content="noindex">
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Mustofa Sagala</title>
-    <link rel="shortcut icon" href="https://img.icons8.com/dotty/80/000000/m.png"/>
-    <link rel="stylesheet" href="0_assets/style.css" />
-      <style>
-        /* CSS untuk menyembunyikan tautan di pojok kiri browser */
-        #hidden-link {
-            position: fixed;
-            left: -9999px;
-        }
-                body,
-html {
-  margin: 0;
-  padding: 0;
-  font-family: "Open Sans", sans-serif;
-  color: #fff;
+<html lang="id">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portofolio Mustofa Sagala — Accounting Professional & Web Technology Enthusiast</title>
+<meta name="description" content="Portfolio Mustofa Sagala: profesional berlatar belakang Akuntansi dan Magister Akuntansi yang membangun sistem web untuk memudahkan pekerjaan.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mustofa Sagala — Accounting Professional & Web Technology Enthusiast">
+<meta property="og:description" content="Accounting, Technology, Systems, Data & Efficiency.">
+<meta name="theme-color" content="#0b1513">
+<style>
+:root{
+  --bg:#0b1513;--bg2:#12231f;--card:#10201c;--line:rgba(236,228,208,.14);--rule:rgba(236,228,208,.045);
+  --text:#ece6d6;--muted:#a9b6ae;--accent:#d4b06a;--accent2:#7fb8a4;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --hdr:58px;--bar:64px;--sat:env(safe-area-inset-top,0px);--sab:env(safe-area-inset-bottom,0px);--r:14px;
 }
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font:1rem/1.65 var(--sans);overflow-x:hidden;min-height:100svh;
+  padding:calc(var(--hdr) + var(--sat)) 0 calc(var(--bar) + var(--sab) + 1rem);-webkit-font-smoothing:antialiased}
+/* Ledger-paper background: fixed, no filters, keeps pages from feeling empty */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(70% 45% at 100% 0%,rgba(127,184,164,.16),transparent 70%),radial-gradient(60% 40% at 0% 100%,rgba(212,176,106,.1),transparent 70%),
+  linear-gradient(var(--rule) 1px,transparent 1px) 0 0/100% 34px,linear-gradient(90deg,var(--rule) 1px,transparent 1px) 0 0/34px 100%}
+a{color:inherit;text-decoration:none}ul,ol{list-style:none}img{max-width:100%;display:block}button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:#111;padding:.5rem 1rem;z-index:200}.skip:focus{left:8px}
+.wrap{width:min(100% - 2rem,1040px);margin-inline:auto}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.15;letter-spacing:-.01em}
+h2{font-size:clamp(1.8rem,6vw,2.6rem)}h3{font-size:1.2rem}
+.muted{color:var(--muted)}.acc{color:var(--accent)}
 
-body {
-  background: url(0_assets/flat-mountains.svg) no-repeat center center fixed;
-  background-size: cover;
+/* Header: solid background, no backdrop-filter (that was breaking fixed children) */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:60;background:var(--bg);border-bottom:1px solid var(--line);padding-top:var(--sat)}
+.hdr-in{height:var(--hdr);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-size:1.2rem}
+.mono{width:32px;height:32px;border-radius:8px;border:1px solid var(--accent);display:grid;place-items:center;color:var(--accent);font-size:.95rem}
+.dnav{display:none}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--bg);border-top:1px solid var(--line);padding-bottom:var(--sab);display:grid;grid-template-columns:repeat(5,1fr)}
+.tab-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:var(--bar);background:none;border:0;color:var(--muted);font-size:.7rem;cursor:pointer;position:relative}
+.tab-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tab-btn[aria-current=page]{color:var(--accent)}
+.tab-btn[aria-current=page]::before{content:"";position:absolute;top:0;width:28px;height:3px;border-radius:0 0 3px 3px;background:var(--accent)}
+
+/* Tabs */
+.tab{display:none;padding:1.4rem 0 2rem}.tab.on{display:block}
+.stack>*{animation:up .5s calc(var(--i,0)*70ms) both}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.stack{display:grid;gap:1.1rem}
+.head{display:grid;gap:.4rem;margin-bottom:.2rem}
+.kick{color:var(--accent);font-size:.85rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:1.2rem}
+.card h3{margin-bottom:.6rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 1.4rem;border-radius:999px;border:1px solid var(--line);background:transparent;cursor:pointer;font-size:.95rem;transition:border-color .2s,transform .2s}
+.btn:active{transform:scale(.97)}.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#14110a;font-weight:600}
+.row{display:flex;flex-wrap:wrap;gap:.7rem}
+
+/* Home */
+.hero h1{font-size:clamp(2.8rem,14vw,5.6rem);letter-spacing:-.03em;margin:.4rem 0}
+.role{font-family:var(--serif);font-size:clamp(1.15rem,4.6vw,1.6rem);color:var(--accent);margin-bottom:.8rem}
+.lead{color:var(--muted);max-width:56ch;margin-bottom:1.3rem}
+.ledger{border:1px solid var(--line);border-radius:var(--r);background:var(--card);overflow:hidden;font-size:.92rem}
+.ledger>div{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+.ledger span{padding:.85rem 1rem}.ledger span+span{border-left:1px solid var(--line);color:var(--accent2)}
+.ledger .lh,.ledger .lf{font-family:var(--serif);background:rgba(255,255,255,.04)}
+.ledger .lh span,.ledger .lf span{color:var(--text)}
+.ledger .lf{border-bottom:0;border-top:3px double var(--accent)}.ledger .lf span+span{color:var(--accent)}
+.ledger .lr span:first-child{color:var(--muted)}
+.marq{overflow:hidden;border-block:1px solid var(--line);padding:.8rem 0;margin-inline:-1rem; margin:20px 0;}
+.marq div{display:flex;gap:2rem;width:max-content;animation:mv 26s linear infinite;font-family:var(--serif);font-size:1.15rem;color:var(--muted)}
+.marq b{color:var(--accent);font-weight:400}
+@keyframes mv{to{transform:translateX(-50%)}}
+.story{border-left:3px solid var(--accent);background:linear-gradient(90deg,rgba(212,176,106,.08),transparent);}
+.story p{font-family:var(--serif);font-size:1.15rem;line-height:1.5}
+.go{display:grid;gap:.7rem;grid-template-columns:1fr 1fr; margin-top:20px;}
+.go button{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:1rem;cursor:pointer;display:grid;gap:.25rem;transition:border-color .2s}
+.go button:hover{border-color:var(--accent)}
+.go strong{font-family:var(--serif);font-weight:500;font-size:1.05rem}.go span{font-size:.82rem;color:var(--muted);line-height:1.4}
+
+/* About / CV */
+.id{display:flex;gap:1rem;align-items:center}
+.avatar{flex:none;width:76px;height:76px;border-radius:50%;border:2px solid var(--accent);background:linear-gradient(135deg,#1a3a32,#0e1d1a);display:grid;place-items:center;overflow:hidden}
+.avatar svg{width:38px;height:38px;fill:none;stroke:var(--accent);stroke-width:1.5}
+.avatar img{width:100%;height:100%;object-fit:cover}
+dl.kv{display:grid;gap:0}
+.kv div{display:grid;grid-template-columns:110px 1fr;gap:.6rem;padding:.7rem 0;border-bottom:1px dashed var(--line)}
+.kv div:last-child{border:0}.kv dt{color:var(--muted);font-size:.88rem}.kv dd{word-break:break-word}
+.tl{border-left:1px solid var(--accent);margin-left:.4rem;padding-left:1.2rem;display:grid;gap:1.3rem}
+.tl li{position:relative;display:grid;gap:.1rem}
+.tl li::before{content:"";position:absolute;left:-1.62rem;top:.5rem;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.tl span{color:var(--muted)}.tl time{color:var(--accent);font-size:.88rem}.tl p{color:var(--muted);font-size:.95rem;margin-top:.2rem}
+.foc{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.foc div{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:.9rem}
+.foc div:last-child{grid-column:1/-1}
+.foc h4{font-size:1rem;color:var(--accent);margin-bottom:.2rem}.foc p{font-size:.86rem;color:var(--muted);line-height:1.45}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chips li{padding:.4rem .9rem;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:rgba(255,255,255,.03);font-size:.9rem}
+.chips+h4{margin-top:1.1rem}h4.lab{font-family:var(--sans);font-size:.85rem;color:var(--accent);margin-bottom:.6rem;font-weight:500}
+
+/* Projects */
+.filters{display:flex;gap:.5rem;overflow-x:auto;padding:.2rem 1rem .5rem;margin-inline:-1rem;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.chip{flex:none;min-height:40px;padding:0 1.1rem;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--muted);cursor:pointer;font-size:.9rem}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#14110a;font-weight:600}
+.grid{display:grid;gap:1rem}
+.pc{display:flex;flex-direction:column;text-align:left;width:100%;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s}
+.pc:active{transform:scale(.985)}.pc:hover{border-color:var(--accent)}
+.pc.hide{display:none}
+.shot{aspect-ratio:16/8;display:grid;place-items:center;font-family:var(--serif);font-size:2.4rem;color:var(--accent);border-bottom:1px solid var(--line);overflow:hidden;
+  background:linear-gradient(135deg,#17332c,#0d1b18);position:relative}
+.shot::after{content:"";position:absolute;inset:0;background:linear-gradient(var(--rule) 1px,transparent 1px) 0 0/100% 18px}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.pb{padding:1.1rem;display:grid;gap:.45rem}
+.cat{color:var(--accent2);font-size:.82rem}.pb p{color:var(--muted);font-size:.93rem}
+.tech{display:flex;flex-wrap:wrap;gap:.4rem;padding-top:.3rem}
+.tech span{border:1px solid var(--line);border-radius:6px;padding:.05rem .5rem;font-size:.78rem;color:var(--muted)}
+.more{color:var(--accent);font-size:.9rem;padding-top:.3rem}
+
+/* Experience */
+.steps{display:grid;gap:.7rem}
+.steps li{display:flex;gap:1rem;align-items:flex-start;padding:1rem;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03)}
+.steps b{flex:none;width:34px;height:34px;border-radius:50%;background:var(--accent);color:#14110a;display:grid;place-items:center;font-family:var(--serif)}
+.steps h4{font-size:1.05rem}.steps p{color:var(--muted);font-size:.92rem;line-height:1.5}
+
+/* Contact */
+.links{display:grid;gap:.7rem}
+.lc{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:64px;padding:.9rem 1.1rem;background:var(--card);border:1px solid var(--line);border-radius:var(--r);transition:border-color .2s}
+.lc:hover{border-color:var(--accent)}.lc small{display:block;color:var(--muted);font-size:.8rem}.lc span{word-break:break-word}.lc i{color:var(--accent);font-style:normal;flex:none}
+.foot{text-align:center;color:var(--muted);font-size:.85rem;padding:1rem 0 .5rem;border-top:1px solid var(--line);margin-top:1rem}
+.foot strong{font-family:var(--serif);font-weight:500;color:var(--text);font-size:1.1rem}
+
+/* Back to top: sits above the tab bar, solid, no filters */
+.toTop{position:fixed;right:1rem;bottom:calc(var(--bar) + var(--sab) + .9rem);width:46px;height:46px;border-radius:50%;border:1px solid var(--accent);background:var(--bg);color:var(--accent);font-size:1.2rem;cursor:pointer;z-index:55;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s,transform .25s,visibility .25s}
+.toTop.show{opacity:1;visibility:visible;transform:none}
+
+/* Modal = bottom sheet on mobile */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(3,8,7,.8);display:flex;align-items:flex-end;justify-content:center;animation:fade .2s}
+.modal[hidden]{display:none}
+.sheet{position:relative;width:100%;max-height:92svh;overflow:auto;overscroll-behavior:contain;background:var(--bg2);border:1px solid var(--line);border-radius:22px 22px 0 0;padding:1.6rem 1.2rem calc(1.4rem + var(--sab));animation:sl .3s}
+.sheet::before{content:"";display:block;width:42px;height:4px;border-radius:4px;background:var(--line);margin:-.6rem auto 1rem}
+.x{position:absolute;top:.5rem;right:.6rem;width:46px;height:46px;border:0;background:none;font-size:1.8rem;cursor:pointer}
+.ms{margin-top:1.1rem}.ms h4{font-size:1rem;color:var(--accent);margin-bottom:.2rem}.ms p,.ms li{color:var(--muted)}.ms ul{list-style:disc;padding-left:1.2rem}
+@keyframes fade{from{opacity:0}}@keyframes sl{from{transform:translateY(40px);opacity:0}}
+
+/* Desktop */
+@media(min-width:821px){
+  body{padding-bottom:2rem}
+  .tabbar{display:none}
+  .dnav{display:flex;gap:.3rem}
+  .dnav .tab-btn{flex-direction:row;height:40px;padding:0 1rem;border-radius:999px;font-size:.92rem}
+  .dnav .tab-btn svg{display:none}.dnav .tab-btn[aria-current=page]{background:rgba(212,176,106,.12)}
+  .dnav .tab-btn[aria-current=page]::before{display:none}
+  .toTop{bottom:1.5rem}
+  .tab{padding:3rem 0}
+  .hero-g{display:grid;grid-template-columns:1.2fr .8fr;gap:3rem;align-items:center}
+  .grid{grid-template-columns:repeat(2,1fr)}.links{grid-template-columns:1fr 1fr}.go{grid-template-columns:repeat(4,1fr)}
+  .cv{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}.cv>.full{grid-column:1/-1}
+  .steps{grid-template-columns:repeat(4,1fr)}.steps li{flex-direction:column}
+  .modal{align-items:center}.sheet{width:min(100%,720px);border-radius:18px;padding:2rem;max-height:88svh}.sheet::before{display:none}
 }
-#vanta {
-  z-index: 0;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-}
-
-main {
-  position: relative;
-  opacity: 0;
-  transition: opacity 2s ease-in-out;
-}
-
-header {
-  margin-top: 3em;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-header > img {
-  width: 6em;
-  height: 6em;
-  border-radius: 100%;
-  border: 1px solid #fff;
-  box-shadow: rgb(28 32 93 / 24%) 0px 2px 8px 0px;
-}
-
-header > h1 {
-  display: inline-block;
-  font-size: 1em;
-  font-weight: bold;
-  border-radius: 1em;
-  background-color: #000a;
-  color: #fff;
-  padding: 0.3em 0.6em;
-  border: 1px solid #fffa;
-  backdrop-filter: blur(10px) saturate(160%) contrast(180%);
-  -webkit-backdrop-filter: blur(10px) saturate(160%) contrast(180%);
-}
-
-ul {
-  box-sizing: border-box;
-  list-style: none;
-  margin: 0 auto;
-  padding: 2em;
-  max-width: 480px;
-}
-
-ul > li {
-  background-color: #fffa;
-  -webkit-backdrop-filter: blur(10px) saturate(160%) contrast(180%);
-  backdrop-filter: blur(10px) saturate(160%) contrast(180%);
-  border-radius: 10em;
-  padding: 1em;
-  margin: 1.4em 0;
-  box-shadow: rgb(28 32 93 / 24%) 0px 2px 8px 0px;
-}
-
-ul > li > a {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5em;
-}
-
-a {
-  color: black;
-  text-decoration: none;
-}
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            VANTA.BIRDS({
-                el: "#vanta",
-                mouseControls: true,
-                touchControls: true,
-                gyroControls: false,
-                minHeight: 200.0,
-                minWidth: 200.0,
-                scale: 1.0,
-                scaleMobile: 1.0,
-                backgroundAlpha: 0,
-                colorMode: "lerp",
-            });
-            const main = document.querySelector("main");
-            main.style.opacity = 1;
-        });
-
-        
-    </script>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TJH73KHL1P"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-TJH73KHL1P');
-</script>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8244688137614188" crossorigin="anonymous"></script>
+@media(min-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media print{.hdr,.tabbar,.toTop,.noprint{display:none!important}.tab{display:none!important}#about{display:block!important}body{background:#fff;color:#000;padding:0}body::before{display:none}.card{border-color:#999;background:#fff}.muted,.kv dt,.tl span,.tl p,.foc p,.chips li{color:#333}}
+</style>
 </head>
-
 <body>
-    <div id="vanta"></div>
-    <main>
-        <header>
-            <img src="0_assets/myphoto.webp" alt="mus" />
-            <h1>Mustofa Sagala</h1>
-        </header>
-        <ul>
-            <li>
-                <a href="mailto:mustofa@sagala.my.id">
-                    <img src="https://img.icons8.com/material-outlined/24/000000/mail.png" alt="Email"  />
-                    Email
-                </a>
-            </li>
-            <li>                
-                <a href="https://scholar.google.com/citations?hl=id&user=Jj5Jbg0AAAAJ">
-                    <img src="https://img.icons8.com/material-outlined/24/000000/web.png" alt="About"  />
-                    Artikel Ilmiah
-                </a>
-            </li>
-            <li>                
-                <a href="/quotes">
-                    <img src="https://img.icons8.com/material-outlined/24/000000/web.png" alt="Quotes"  />
-                    Quotes
-                </a>
-            </li>
-            <li>                
-                <a href="https://santuynesia.com/tools">
-                    <img src="https://img.icons8.com/material-outlined/24/000000/web.png" alt="Tools"  />
-                    Tools
-                </a>
-            </li>
-            <li>                
-                <a href="/hbd">
-                    <img src="https://img.icons8.com/material-outlined/24/000000/web.png" alt="Ultah"  />
-                    Ucapan Ulang Tahun
-                </a>
-            </li>            
-            <p style="text-align: center; font-size: 12px"> © All right reserved | Made with ♥ by @mustofasagala </p>
-        </ul>
-    </main>
-    <script type="text/javascript">
-    document.addEventListener('contextmenu', function (e) {
-        e.preventDefault();
-    });
-    </script>
+<a class="skip" href="#main">Lewati ke konten</a>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="logo" href="#home" data-go="home" aria-label="Mustofa Sagala, ke Home"><span class="mono" aria-hidden="true">N</span>Mustofa Sagala</a>
+    <nav class="dnav" id="dnav" aria-label="Navigasi utama"></nav>
+  </div>
+</header>
+<nav class="tabbar" id="tabbar" aria-label="Navigasi utama (ponsel)"></nav>
+
+<main id="main">
+
+<!-- HOME -->
+<section class="tab" id="home" data-title="Home" aria-label="Home">
+ <div class="wrap stack">
+  <div class="hero-g">
+   <div class="hero">
+    <p class="kick">Accounting • Technology • Systems • Data • Efficiency</p>
+    <h1>Mustofa Sagala</h1>
+    <p class="role">Accounting Professional &amp; Web Technology Enthusiast</p>
+    <p class="lead">Berlatar belakang Akuntansi, baru menyelesaikan S2 Magister Akuntansi. Saya membangun sistem web sederhana untuk pekerjaan yang saya jalani sendiri, supaya data lebih rapi dan proses lebih efisien.</p>
+    <div class="row">
+      <button class="btn pri" data-go="projects">Explore My Work</button>
+      <button class="btn" data-go="contact">Get In Touch</button>
+    </div>
+   </div>
+   <aside class="ledger" aria-label="Ringkasan cara kerja" style="margin-top:1.2rem">
+     <div class="lh"><span>Masalah</span><span>Sistem</span></div>
+     <div class="lr"><span>Data tersebar &amp; manual</span><span>Basis data terpusat</span></div>
+     <div class="lr"><span>Proses berulang</span><span>Alur kerja terstruktur</span></div>
+     <div class="lr"><span>Laporan sulit disusun</span><span>Rekap siap pakai</span></div>
+     <div class="lf"><span>Saldo</span><span>Efisiensi</span></div>
+   </aside>
+  </div>
+  <div class="marq" aria-hidden="true"><div>
+    <span>Accounting</span><b>◆</b><span>Technology</span><b>◆</b><span>Systems</span><b>◆</b><span>Data</span><b>◆</b><span>Efficiency</span><b>◆</b>
+    <span>Accounting</span><b>◆</b><span>Technology</span><b>◆</b><span>Systems</span><b>◆</b><span>Data</span><b>◆</b><span>Efficiency</span><b>◆</b>
+  </div></div>
+  <div class="card story">
+    <p class="kick" style="margin-bottom:.5rem">Kenapa saya membuat sistem</p>
+    <p>Saya tidak membuat aplikasi untuk gaya-gayaan. Setiap proyek lahir dari kebutuhan nyata di pekerjaan saya: ada data yang harus dicatat, direkap, dan dipertanggungjawabkan.</p>
+  </div>
+  <div class="go">
+    <button data-go="about"><strong>About &amp; CV</strong><span>Identitas, pendidikan, keahlian</span></button>
+    <button data-go="projects"><strong>Projects</strong><span>5 sistem dan website</span></button>
+    <button data-go="experience"><strong>Experience</strong><span>Aktivitas &amp; cara berpikir</span></button>
+    <button data-go="contact"><strong>Contact</strong><span>WhatsApp, email, dan lainnya</span></button>
+  </div>
+ </div>
+</section>
+
+<!-- ABOUT / CV -->
+<section class="tab" id="about" data-title="About" aria-label="About dan CV">
+ <div class="wrap">
+  <div class="stack cv">
+   <div class="head full"><p class="kick">About &amp; Curriculum Vitae</p><h2>Profil</h2></div>
+   <div class="card">
+    <div class="id">
+      <div class="avatar" aria-hidden="true"><!-- Ganti dengan: <img src="foto.jpg" alt="Foto Mustofa Sagala"> -->
+        <svg viewBox="0 0 24 24" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg></div>
+      <div><h3 style="margin:0">Mustofa Kamal Ahmad Sagala</h3><p class="muted">Accounting Professional &amp; Web Technology Enthusiast</p></div>
+    </div>
+    <dl class="kv" style="margin-top:1rem">
+      <div><dt>Latar belakang</dt><dd>Akuntansi</dd></div>
+      <div><dt>Pendidikan</dt><dd>Magister Akuntansi (S2)</dd></div>
+      <div><dt>Lokasi</dt><dd>Medan, Sumatera Utara</dd></div>
+      <div><dt>Email</dt><dd>mustofasagala@uinsu.ac.id</dd></div>
+      <div><dt>WhatsApp</dt><dd>0895-61600-5171</dd></div>
+    </dl>
+   </div>
+   <div class="card">
+    <h3>Tentang saya</h3>
+    <p class="muted" style="margin-bottom:.8rem">Saya berlatar belakang Akuntansi dan telah menyelesaikan S2 Magister Akuntansi. Cara berpikir akuntansi yang teliti, runtut, dan bisa dipertanggungjawabkan menjadi dasar cara saya bekerja.</p>
+    <p class="muted">Saya juga senang mendalami web programming. Saya membuat proyek yang memang saya butuhkan untuk menunjang pekerjaan: pengelolaan data, administrasi, dan website organisasi. Saya tidak memosisikan diri sebagai programmer profesional; teknologi adalah alat untuk membuat pekerjaan lebih tertata.</p>
+   </div>
+   <div class="card">
+    <h3>Pendidikan</h3>
+    <ol class="tl">
+      <li><strong>Magister Akuntansi</strong><span>UIN Sumatera Utara</span><time>2026</time></li>
+      <li><strong>Sarjana Akuntansi</strong><span>UIN Sumatera Utara</span><time>2023</time></li>
+      <li><strong>SMA IPS</strong><span>MAN Pematangsiantar</span><time>2019</time></li>
+    </ol>
+   </div>
+   <div class="card">
+    <h3>Skills</h3>
+    <h4 class="lab">Professional</h4>
+    <ul class="chips"><li>Accounting</li><li>Data Management</li><li>System Analysis</li><li>Process Improvement</li><li>Problem Solving</li></ul>
+    <h4 class="lab" style="margin-top:1.1rem">Technology</h4>
+    <ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>PHP</li><li>MySQL</li><li>WordPress</li><li>Git/GitHub</li><li>cPanel</li></ul>
+   </div>
+   <div class="card full">
+    <h3>Fokus &amp; ketertarikan</h3>
+    <div class="foc">
+      <div><h4>System Development</h4><p>Sistem sederhana sesuai kebutuhan kerja nyata.</p></div>
+      <div><h4>Data Management</h4><p>Data konsisten, mudah dicari dan direkap.</p></div>
+      <div><h4>Process Efficiency</h4><p>Mengurangi langkah manual yang berulang.</p></div>
+      <div><h4>Web Technology</h4><p>Teknologi web yang mudah diakses siapa saja.</p></div>
+      <div><h4>Problem Solving</h4><p>Memecah masalah menjadi bagian yang bisa diselesaikan.</p></div>
+    </div>
+   </div>
+   <div class="row full noprint"><button class="btn pri" id="print">Simpan / Cetak CV</button></div>
+  </div>
+ </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="tab" id="projects" data-title="Projects" aria-label="Projects">
+ <div class="wrap stack">
+  <div class="head"><p class="kick">Problem → Analysis → System → Solution → Efficiency</p><h2>Selected Projects</h2>
+    <p class="muted">Proyek yang saya bangun karena memang dibutuhkan, bukan pesanan client. Ketuk untuk melihat detail.</p></div>
+  <div class="filters" role="group" aria-label="Filter project">
+    <button class="chip on" data-f="all" aria-pressed="true">All</button>
+    <button class="chip" data-f="web" aria-pressed="false">Web</button>
+    <button class="chip" data-f="system" aria-pressed="false">System</button>
+    <button class="chip" data-f="data" aria-pressed="false">Data</button>
+    <button class="chip" data-f="organization" aria-pressed="false">Organization</button>
+  </div>
+  <div class="grid" id="grid"></div>
+ </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="tab" id="experience" data-title="Experience" aria-label="Experience dan Activities">
+ <div class="wrap stack">
+  <div class="head"><p class="kick">Experience &amp; Activities</p><h2>Perjalanan</h2></div>
+  <div class="card">
+   <ol class="tl">
+    <li><strong>[JABATAN / PERAN]</strong><span>[ORGANISASI / INSTANSI]</span><time>[PERIODE]</time><p>[Deskripsi singkat dan jujur tentang peran dan kegiatan.]</p></li>
+    <li><strong>Pengembangan sistem untuk organisasi masjid &amp; komunitas</strong><span>Al Muhajirin Bumi Asri, Medan</span><time>[PERIODE]</time><p>Membangun dan mengelola website serta sistem pengelolaan data untuk kebutuhan kerja organisasi.</p></li>
+    <li><strong>[AKTIVITAS LAIN]</strong><span>[ORGANISASI]</span><time>[PERIODE]</time><p>[Organisasi, kepanitiaan, atau aktivitas teknologi lain.]</p></li>
+   </ol>
+  </div>
+  <div class="head" style="margin-top:.6rem"><p class="kick">How I Approach Problems</p><h2>Cara saya bekerja</h2></div>
+  <ol class="steps">
+    <li><b>1</b><div><h4>Understand</h4><p>Mulai dari kebutuhan dan proses yang sedang berjalan.</p></div></li>
+    <li><b>2</b><div><h4>Structure</h4><p>Susun data dan alur proses sebelum menulis kode.</p></div></li>
+    <li><b>3</b><div><h4>Build</h4><p>Bangun sistem sederhana yang benar-benar dipakai.</p></div></li>
+    <li><b>4</b><div><h4>Improve</h4><p>Perbaiki berdasarkan pemakaian demi efisiensi.</p></div></li>
+  </ol>
+ </div>
+</section>
+
+<!-- CONTACT -->
+<section class="tab" id="contact" data-title="Contact" aria-label="Contact">
+ <div class="wrap stack">
+  <div class="head"><p class="kick">Contact</p><h2>Let's Connect</h2>
+    <p class="muted">Ketuk salah satu untuk langsung menghubungi saya.</p></div>
+  <div class="links">
+    <a class="lc" href="https://wa.me/62895616005171" target="_blank" rel="noopener"><div><small>WhatsApp</small><span>0895-61600-5171</span></div><i>↗</i></a>
+    <a class="lc" href="mailto:mustofasagala@uinsu.ac.id"><div><small>Email</small><span>mustofasagala@uinsu.ac.id</span></div><i>↗</i></a>
+    <a class="lc" href="https://mustofasagala.github.io" target="_blank" rel="noopener"><div><small>GitHub</small><span>MustofaSagala</span></div><i>↗</i></a>
+    <a class="lc" href="https://instagram.com/mustofasagala" target="_blank" rel="noopener"><div><small>Instagram</small><span>mustofasagala</span></div><i>↗</i></a>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer class="wrap foot"><strong>Mustofa Sagala</strong><p>Accounting • Technology • Systems • Data</p><p>© <span id="year">2026</span> Mustofa Sagala. All rights reserved.</p></footer>
+
+<button class="toTop" id="toTop" aria-label="Kembali ke atas">↑</button>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title" hidden>
+  <div class="sheet" id="sheet" tabindex="-1"><button class="x" id="x" aria-label="Tutup detail project">×</button><div id="mb"></div></div>
+</div>
+
+<script>
+/* ===== Data proyek — edit di sini =====
+   img: path screenshot (mis. "img/muhajirin.jpg"); kosong = placeholder.
+   demo / code: URL jika ada; kosong = tombol tidak tampil. */
+const PROJECTS=[
+{id:"web-muhajirin",name:"Website Al Muhajirin Bumi Asri",cat:"Web • Organisasi",tags:["web","organization"],img:"https://www.almuhajirinbumas.com/wp-content/uploads/2023/02/IMG-20230116-WA0021.jpg",demo:"almuhajirinbumas.com",code:"",
+ summary:"Website resmi untuk informasi dan kegiatan Masjid Al Muhajirin Bumi Asri, Medan.",
+ problem:"Informasi kegiatan dan layanan masjid belum terkumpul di satu tempat yang mudah diakses jamaah.",
+ approach:"Memetakan informasi yang dibutuhkan jamaah, lalu menyusunnya dalam struktur halaman yang sederhana.",
+ solution:"Website organisasi yang memusatkan informasi dan menjadi pintu masuk ke layanan lainnya.",
+ features:["Informasi masjid dan kegiatan","Tampilan responsif","Tautan ke sistem layanan terkait"],tech:["HTML","CSS","JavaScript","PHP","MySQL"],
+ result:"Informasi organisasi lebih mudah diakses dan dikelola oleh jamaah."},
+{id:"data-upz",name:"Sistem Pengelolaan Data UPZ",cat:"Data • Sistem • Organisasi",tags:["data","system","organization"],img:"",demo:"",code:"",
+ summary:"Web pengelolaan data Unit Pengumpul Zakat (UPZ) Al Muhajirin Bumi Asri, Medan.",
+ problem:"Pencatatan data zakat secara manual rentan tidak konsisten dan menyulitkan rekapitulasi.",
+ approach:"Menelaah alur pencatatan yang berjalan, lalu merapikan data dan prosesnya sebelum dibangun menjadi sistem.",
+ solution:"Sistem berbasis web untuk mencatat dan mengelola data UPZ secara terstruktur.",
+ features:["Penerimaan dan Penyaluran Zakat", "Database Mustahiq", "Program Kerja", "Manajemen Kas", "Verifikasi Data", "Pengelolaan Zakat Fitrah", "Arsip Surat", "Laporan Keuangan dan Zakat"],tech:["PHP","MySQL","HTML","CSS","JavaScript"],
+ result:"Data lebih tertata dan rekap lebih mudah disusun dan transparansi oleh jamaah"},
+{id:"data-muallaf",name:"Sistem Pengelolaan Data Bina Muallaf",cat:"Data • Sistem • Organisasi",tags:["data","system","organization"],img:"",demo:"",code:"",
+ summary:"Web pengelolaan data program Bina Muallaf Al Muhajirin Bumi Asri, Medan.",
+ problem:"Data muallaf dan administrasi pendampingannya perlu dicatat rapi dan mudah ditelusuri.",
+ approach:"Mengidentifikasi data yang perlu dikelola dan alur administrasinya, lalu menyusunnya menjadi sistem.",
+ solution:"Sistem berbasis web untuk mengelola data dan administrasi program Bina Muallaf.",
+ features:["Penerimaan dan Pengeluaran", "Rekap dan Laporan Bulanan", "Kategori", "Database Muallaf", "Pensyahadatan", "Pembinaan Muallaf", "Sertifikat Muallaf"],tech:["PHP","MySQL","HTML","CSS","JavaScript"],
+ result:"Administrasi lebih sistematis dan data lebih mudah ditelusuri."},
+{id:"data-qurban",name:"Sistem Pengelolaan Data Qurban",cat:"Data • Sistem • Organisasi",tags:["data","system","organization"],img:"",demo:"",code:"",
+ summary:"Web pengelolaan data qurban Al Muhajirin Bumi Asri, Medan.",
+ problem:"Pendataan peserta dan pelaksanaan qurban melibatkan banyak data dalam waktu singkat.",
+ approach:"Menyusun struktur data dan alur pendaftaran hingga pelaksanaan agar proses lebih terkontrol.",
+ solution:"Sistem berbasis web untuk mengelola data qurban dari pendataan sampai rekap.",
+ features:["Pendataan peserta qurban","Rekap data","Akses dimana saja"],tech:["PHP","MySQL","HTML","CSS","JavaScript"],
+ result:"Pendataan lebih rapi dan rekap lebih cepat disusun. "},
+{id:"web-fkub",name:"Website FKUB Kota Medan",cat:"Web • Organisasi",tags:["web","organization"],img:"",demo:"fkubkotamedan.or.id",code:"",
+ summary:"Website Forum Kerukunan Umat Beragama (FKUB) Kota Medan.",
+ problem:"Forum membutuhkan media informasi resmi yang mudah diakses publik.",
+ approach:"Menentukan konten utama forum dan menyusunnya dalam struktur website yang jelas.",
+ solution:"Website organisasi sebagai media informasi dan publikasi kegiatan forum.",
+ features:["Profil dan informasi organisasi","Publikasi kegiatan","Tampilan responsif"],tech:["HTML","CSS","JavaScript","PHP","MySQL"],
+ result:"Informasi forum tersedia dalam satu media resmi."}
+];
+
+const $=(s,c=document)=>c.querySelector(s),$$=(s,c=document)=>[...c.querySelectorAll(s)];
+const url=u=>/^(https?:|mailto:)/.test(u)?u:"https://"+u;
+$("#year").textContent=new Date().getFullYear();
+
+/* ---- Tabs (hash routing: tombol Back browser tetap berfungsi) ---- */
+const I={
+ home:'<path d="M3 11l9-8 9 8M5 10v10h14V10"/>',
+ about:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/>',
+ projects:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14h4"/>',
+ experience:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2M3 13h18"/>',
+ contact:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>'};
+const TABS=["home","about","projects","experience","contact"];
+const ALIAS={background:"about",skills:"about",approach:"experience"};
+const label=id=>$("#"+id).dataset.title;
+[["#dnav"],["#tabbar"]].forEach(([sel])=>{
+  $(sel).innerHTML=TABS.map(id=>`<button class="tab-btn" data-go="${id}"><svg viewBox="0 0 24 24" aria-hidden="true">${I[id]}</svg>${label(id)}</button>`).join("");
+});
+function show(id,push){
+  id=ALIAS[id]||id; if(!TABS.includes(id))id="home";
+  TABS.forEach(t=>{
+    const on=t===id,s=$("#"+t); s.classList.toggle("on",on);
+    if(on)[...s.querySelector(".stack").children].forEach((c,i)=>c.style.setProperty("--i",i));
+  });
+  $$(".tab-btn").forEach(b=>{b.dataset.go===id?b.setAttribute("aria-current","page"):b.removeAttribute("aria-current")});
+  document.title=(id==="home"?"":label(id)+" · ")+"Mustofa Sagala — Accounting & Web Technology";
+  if(push&&location.hash!=="#"+id)history.pushState(null,"","#"+id);
+  scrollTo(0,0); syncTop();
+}
+document.addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g){e.preventDefault();closeModal();show(g.dataset.go,true)}});
+addEventListener("popstate",()=>show(location.hash.slice(1)));
+$$(".stack").forEach(()=>0);
+
+/* ---- Projects ---- */
+const grid=$("#grid");
+grid.innerHTML=PROJECTS.map(p=>`<button class="pc" data-id="${p.id}" data-tags="${p.tags.join(" ")}" aria-haspopup="dialog">
+ <div class="shot">${p.img?`<img src="${p.img}" alt="Tampilan ${p.name}" loading="lazy">`:p.name.split(" ").filter(w=>/^[A-Z]/.test(w)).slice(0,2).map(w=>w[0]).join("")}</div>
+ <div class="pb"><span class="cat">${p.cat}</span><h3>${p.name}</h3><p>${p.summary}</p>
+ <div class="tech">${p.tech.slice(0,4).map(t=>`<span>${t}</span>`).join("")}</div><span class="more">Lihat detail →</span></div></button>`).join("");
+$$(".chip").forEach(b=>b.addEventListener("click",()=>{
+  $$(".chip").forEach(c=>{c.classList.toggle("on",c===b);c.setAttribute("aria-pressed",c===b)});
+  $$(".pc").forEach(c=>c.classList.toggle("hide",b.dataset.f!=="all"&&!c.dataset.tags.split(" ").includes(b.dataset.f)));
+}));
+
+/* ---- Modal (bottom sheet): X, klik luar, ESC ---- */
+const modal=$("#modal"),sheet=$("#sheet");let last=null;
+const sec=(t,c)=>`<div class="ms"><h4>${t}</h4>${c}</div>`;
+function openModal(id){
+  const p=PROJECTS.find(x=>x.id===id);last=document.activeElement;
+  $("#mb").innerHTML=`<span class="cat">${p.cat}</span><h3 id="m-title" style="font-size:1.5rem;margin-top:.2rem">${p.name}</h3>
+  ${p.img?`<img src="${p.img}" alt="Tampilan ${p.name}" loading="lazy" style="border-radius:10px;margin:1rem 0">`:""}
+  ${sec("Overview",`<p>${p.summary}</p>`)}${sec("Problem",`<p>${p.problem}</p>`)}${sec("Approach",`<p>${p.approach}</p>`)}${sec("Solution",`<p>${p.solution}</p>`)}
+  ${sec("Features",`<ul>${p.features.map(f=>`<li>${f}</li>`).join("")}</ul>`)}${sec("Technology",`<p>${p.tech.join(", ")}</p>`)}${sec("Benefit / Result",`<p>${p.result}</p>`)}
+  <div class="row" style="margin-top:1.4rem">${p.demo?`<a class="btn pri" href="${url(p.demo)}" target="_blank" rel="noopener">Live Demo</a>`:""}${p.code?`<a class="btn" href="${url(p.code)}" target="_blank" rel="noopener">Source Code</a>`:""}</div>`;
+  modal.hidden=false;document.body.style.overflow="hidden";sheet.scrollTop=0;sheet.focus();
+}
+function closeModal(){if(modal.hidden)return;modal.hidden=true;document.body.style.overflow="";last&&last.focus()}
+grid.addEventListener("click",e=>{const c=e.target.closest(".pc");c&&openModal(c.dataset.id)});
+$("#x").addEventListener("click",closeModal);
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape")closeModal();
+  if(e.key==="Tab"&&!modal.hidden){const f=$$("button,a[href]",sheet),a=f[0],z=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}
+    else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}
+});
+
+/* ---- Back to top (variabel diberi nama toTopBtn: "top" bentrok dengan window.top) ---- */
+const toTopBtn=$("#toTop");
+function syncTop(){toTopBtn.classList.toggle("show",scrollY>400)}
+addEventListener("scroll",syncTop,{passive:true});
+toTopBtn.addEventListener("click",()=>scrollTo({top:0,behavior:"smooth"}));
+
+$("#print").addEventListener("click",()=>print());
+show(location.hash.slice(1));
+</script>
 </body>
-  
 </html>
